@@ -13,6 +13,11 @@
   gtag('js', new Date());
   gtag('config', 'G-FRR0CJDZEY');
 </script>
+<script>
+(function(){try{var t=localStorage.getItem('dwa-theme'),f=localStorage.getItem('dwa-fs');
+if(t==='dark')document.documentElement.classList.add('dark');
+document.documentElement.classList.add('fs-'+(f==='s'||f==='l'?f:'m'));}catch(e){document.documentElement.classList.add('fs-m');}})();
+</script>
 <style>
 :root {
   /* ロゴ配色ベース */
@@ -577,7 +582,7 @@ select option { background: #fff; }
 /* ===== DWAロゴ文字 ===== */
 .account-name-top .dwa{margin-right:4px;background:linear-gradient(180deg,#ffffff 0%,#cfe3ff 45%,#7fb2ff 55%,#e8f1ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
 /* ===== ハンバーガーメニュー ===== */
-#hb-btn{margin-left:auto;flex-shrink:0;width:44px;height:44px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.45);background:rgba(255,255,255,0.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;transition:background .15s}
+#hb-btn{flex-shrink:0;width:44px;height:44px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.45);background:rgba(255,255,255,0.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;transition:background .15s}
 #hb-btn:hover{background:rgba(255,255,255,0.22)}
 #hb-btn span{display:block;width:20px;height:2.5px;border-radius:2px;background:#fff;transition:transform .2s,opacity .2s}
 #hb-btn.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
@@ -609,6 +614,71 @@ select option { background: #fff; }
   .account-name-top{font-size:13.5px}
   #center-bar .cb-domain{display:none}
 }
+/* ===== ヘッダーツール（共有・リンク・テーマ・文字サイズ） ===== */
+.hdr-tools{margin-left:auto;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.ht-btn{display:inline-flex;align-items:center;gap:5px;height:36px;padding:0 10px;border-radius:10px;border:1.5px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.12);color:#fff;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s}
+.ht-btn:hover{background:rgba(255,255,255,0.24)}
+.ht-btn svg{width:16px;height:16px;flex-shrink:0}
+.ht-btn .ic-sun{display:none}
+html.dark .ht-btn .ic-sun{display:block}
+html.dark .ht-btn .ic-moon{display:none}
+.ht-seg{display:inline-flex;height:36px;border-radius:10px;border:1.5px solid rgba(255,255,255,0.4);overflow:hidden;background:rgba(255,255,255,0.08)}
+.ht-seg button{width:32px;border:none;background:transparent;color:#fff;font-family:inherit;font-weight:800;cursor:pointer;border-right:1px solid rgba(255,255,255,0.25)}
+.ht-seg button:last-child{border-right:none}
+.ht-seg button[data-fs="s"]{font-size:11px}
+.ht-seg button[data-fs="m"]{font-size:13px}
+.ht-seg button[data-fs="l"]{font-size:15px}
+.ht-seg button.on{background:#fff;color:#1a3a6b}
+.ht-seg button:hover:not(.on){background:rgba(255,255,255,0.18)}
+#hb-btn{margin-left:6px}
+@media (max-width:1100px){ .topbar-divider,.topbar-tagline{display:none} }
+@media (max-width:760px){
+  .topbar-inner{flex-wrap:wrap;row-gap:8px}
+  .logo-wrap{flex:1 1 auto;min-width:0}
+  .hdr-tools{order:3;width:100%;margin-left:0;justify-content:center;padding-top:8px;border-top:1px solid rgba(255,255,255,0.14)}
+}
+@media (max-width:380px){
+  .ht-btn{padding:0 8px;font-size:11px}
+  .ht-btn .ht-lbl{display:none}
+  .ht-btn{width:40px;justify-content:center}
+}
+/* 共有パネル・トースト */
+#share-pop{display:none;position:fixed;z-index:9000;background:#fff;border:1.5px solid rgba(26,58,107,0.18);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,0.18);min-width:220px;overflow:hidden}
+#share-pop.open{display:block}
+.sp-title{font-size:12px;font-weight:800;color:#6a7a8a;padding:10px 16px 6px}
+.sp-item{display:block;width:100%;text-align:left;padding:12px 16px;border:none;border-top:1px solid #edf0f5;background:#fff;font-family:inherit;font-size:14px;font-weight:600;color:#1a2b45;text-decoration:none;cursor:pointer}
+.sp-item:hover{background:#f1f5fb}
+#dwa-toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:rgba(20,30,45,0.92);color:#fff;font-size:13px;font-weight:700;padding:10px 18px;border-radius:24px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:9900;white-space:nowrap}
+#dwa-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* ===== 文字サイズ（本文のみ拡縮。ヘッダーは固定） ===== */
+html.fs-s body > .container, html.fs-s body > .container ~ div:not(.dwa-overlay):not(#share-pop):not(#dwa-toast){zoom:.88}
+html.fs-l body > .container, html.fs-l body > .container ~ div:not(.dwa-overlay):not(#share-pop):not(#dwa-toast){zoom:1.18}
+html.fs-s .dwa-modal{font-size:13px} html.fs-l .dwa-modal{font-size:16px}
+/* ===== ダークモード ===== */
+html.dark{
+  --navy:#6f9be0; --navy2:#86ace8; --green:#4caf50; --green2:#66bb6a;
+  --green-lt:#1c2e22; --navy-lt:#1d2b42; --orange:#ff8a3d; --orange2:#ffa060;
+  --bg:#0f1419; --bg2:#151b22; --surface:#1a2129; --surface2:#1f2730; --surface3:#24303a;
+  --border:rgba(255,255,255,0.08); --border2:rgba(255,255,255,0.15);
+  --danger:#ff7b72; --danger-bg:#3a1d1d; --danger-bd:#6b2b2b;
+  --warn:#ffa657; --warn-bg:#3a2a16; --warn-bd:#6b4a22;
+  --safe:#7ee2a1; --safe-bg:#1b2e20; --safe-bd:#2f5a37;
+  --info:#79b8ff; --info-bg:#18283d;
+  --text:#e6ece8; --text2:#c2ccc6; --text3:#8f9b95;
+  color-scheme:dark;
+}
+html.dark body{background-image:none}
+html.dark .hb-item, html.dark .sp-item, html.dark #hb-menu, html.dark #share-pop{background:#1f2730;color:#e6ece8;border-color:rgba(255,255,255,0.12)}
+html.dark .hb-item:hover, html.dark .sp-item:hover{background:#26313c}
+html.dark .hb-item, html.dark .sp-item{border-bottom-color:rgba(255,255,255,0.08);border-top-color:rgba(255,255,255,0.08)}
+html.dark .dwa-modal{background:#1a2129;color:#d6ddd9}
+html.dark .dwa-modal-title, html.dark .dwa-modal h3{color:#9fc0f0;border-color:rgba(255,255,255,0.12)}
+html.dark .dwa-close{background:#26313c;color:#c2ccc6}
+html.dark .goods-box{background:#2a2117}
+html.dark .goods-link{background:#1f2730;color:#e6ece8;border-color:#5a4426}
+html.dark .goods-desc, html.dark .goods-cat{color:#f0b37a}
+html.dark .goods-cat{border-color:#5a4426}
+html.dark .tog:not(.active), html.dark .copy-btn, html.dark button[id^="cpbtn_"]{background:var(--surface2) !important}
 </style>
 </head>
 <body>
@@ -824,6 +894,14 @@ function toggleEmergency() {
 
     <div class="topbar-divider"></div>
     <div class="topbar-tagline">家族と地域を守る<br>防災備蓄・避難診断ツール</div>
+    <div class="hdr-tools" role="toolbar" aria-label="表示と共有">
+      <button class="ht-btn" id="htShare" type="button" onclick="dwaShare(event)" title="このツールを共有" aria-label="共有"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span class="ht-lbl">共有</span></button>
+      <button class="ht-btn" id="htLink" type="button" onclick="dwaCopyLink()" title="リンクをコピー" aria-label="リンクをコピー"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><span class="ht-lbl">リンク</span></button>
+      <button class="ht-btn" id="htTheme" type="button" onclick="dwaToggleTheme()" title="ダーク／ライト切替" aria-label="ダーク／ライト切替"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><span class="ht-lbl" id="htThemeLbl">ダーク</span></button>
+      <div class="ht-seg" role="group" aria-label="文字サイズ">
+        <button type="button" data-fs="s" onclick="dwaSetFs('s')" aria-label="文字サイズ 小">小</button><button type="button" data-fs="m" onclick="dwaSetFs('m')" aria-label="文字サイズ 中">中</button><button type="button" data-fs="l" onclick="dwaSetFs('l')" aria-label="文字サイズ 大">大</button>
+      </div>
+    </div>
     <button id="hb-btn" type="button" onclick="toggleHbMenu(event)" aria-label="メニュー" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </div>
@@ -835,6 +913,16 @@ function toggleEmergency() {
   <button class="hb-item" type="button" onclick="hbGoSurvey()">💬 ご意見・ご要望（アンケート）</button>
   <button class="hb-item" type="button" onclick="openDwaModal('dwa-privacy')">🔒 プライバシーポリシー</button>
 </div>
+
+<!-- ===== 共有パネル（Web Share非対応時） ===== -->
+<div id="share-pop" role="dialog" aria-label="共有">
+  <div class="sp-title">このツールを共有</div>
+  <a class="sp-item" id="spX" target="_blank" rel="noopener">𝕏 X（旧Twitter）</a>
+  <a class="sp-item" id="spLine" target="_blank" rel="noopener">💬 LINE</a>
+  <a class="sp-item" id="spFb" target="_blank" rel="noopener">📘 Facebook</a>
+  <button class="sp-item" type="button" onclick="dwaCopyLink();dwaCloseShare()">🔗 リンクをコピー</button>
+</div>
+<div id="dwa-toast" role="status" aria-live="polite"></div>
 
 <!-- ===== プライバシーポリシー ===== -->
 <div class="dwa-overlay" id="dwa-privacy" onclick="if(event.target===this)closeDwaModal('dwa-privacy')">
@@ -2602,6 +2690,80 @@ document.addEventListener('keydown', function(e){
     if(document.getElementById('hb-menu').classList.contains('open')) setHbOpen(false);
   }
 });
+</script>
+<script>
+// ===== ヘッダーツール =====
+function dwaToast(msg){
+  var t=document.getElementById('dwa-toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(dwaToast._t); dwaToast._t=setTimeout(function(){t.classList.remove('show');},2200);
+}
+function dwaPageUrl(){ return location.href.split('#')[0]; }
+function dwaCopyLink(){
+  var url=dwaPageUrl();
+  function fallback(){
+    var ta=document.createElement('textarea'); ta.value=url; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    var ok=false; try{ ok=document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
+    dwaToast(ok?'🔗 リンクをコピーしました':'コピーできませんでした');
+  }
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(url).then(function(){dwaToast('🔗 リンクをコピーしました');}, fallback);
+  } else fallback();
+}
+function dwaCloseShare(){ document.getElementById('share-pop').classList.remove('open'); }
+function dwaShare(ev){
+  if(ev) ev.stopPropagation();
+  var url=dwaPageUrl(), title=document.title, text='家族構成・居住地に合わせた防災備蓄＆避難袋を無料で診断できます。';
+  if(navigator.share){
+    navigator.share({title:title,text:text,url:url}).catch(function(){});
+    return;
+  }
+  var pop=document.getElementById('share-pop');
+  if(pop.classList.contains('open')){ dwaCloseShare(); return; }
+  var u=encodeURIComponent(url), tx=encodeURIComponent(text);
+  document.getElementById('spX').href='https://twitter.com/intent/tweet?text='+tx+'&url='+u;
+  document.getElementById('spLine').href='https://social-plugins.line.me/lineit/share?url='+u;
+  document.getElementById('spFb').href='https://www.facebook.com/sharer/sharer.php?u='+u;
+  if(typeof setHbOpen==='function') setHbOpen(false);
+  var r=document.getElementById('htShare').getBoundingClientRect();
+  pop.style.top=(r.bottom+8)+'px';
+  pop.style.left=Math.max(10, Math.min(r.left, window.innerWidth-230))+'px';
+  pop.classList.add('open');
+}
+document.addEventListener('click', function(ev){
+  var pop=document.getElementById('share-pop');
+  if(pop.classList.contains('open') && (!pop.contains(ev.target) || ev.target.closest('.sp-item'))) setTimeout(dwaCloseShare,0);
+});
+window.addEventListener('scroll', function(){ dwaCloseShare(); }, {passive:true});
+function dwaSave(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+function dwaSyncThemeBtn(){
+  var dark=document.documentElement.classList.contains('dark');
+  document.getElementById('htThemeLbl').textContent=dark?'ライト':'ダーク';
+  document.getElementById('htTheme').setAttribute('aria-pressed', dark?'true':'false');
+}
+function dwaToggleTheme(){
+  var dark=!document.documentElement.classList.contains('dark');
+  document.documentElement.classList.toggle('dark', dark);
+  dwaSave('dwa-theme', dark?'dark':'light');
+  dwaSyncThemeBtn();
+}
+function dwaSetFs(f){
+  var h=document.documentElement;
+  h.classList.remove('fs-s','fs-m','fs-l'); h.classList.add('fs-'+f);
+  document.querySelectorAll('.ht-seg button').forEach(function(b){
+    var on=b.getAttribute('data-fs')===f; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on?'true':'false');
+  });
+  dwaSave('dwa-fs', f);
+  if(typeof placeHbMenu==='function') placeHbMenu();
+}
+(function(){
+  var h=document.documentElement;
+  dwaSetFs(h.classList.contains('fs-s')?'s':h.classList.contains('fs-l')?'l':'m');
+  dwaSyncThemeBtn();
+  // ヘッダーの高さが変わったらメニュー位置を追従
+  window.addEventListener('resize', function(){ dwaCloseShare(); });
+})();
 </script>
 </body>
 </html>
